@@ -1,0 +1,55 @@
+# 3D Perfume Animation Project
+
+This project is a 3D animation of a perfume bottle moving onto a bookshelf, implemented using WebGL. The animation is interactive, allowing users to start and stop the animation with a button click.
+
+## Prerequisites
+
+Before running the project, ensure you have the following installed:
+
+- A modern web browser that supports WebGL.
+- A local server to serve the HTML files (e.g., using `http-server` for Node.js).
+
+## Project Structure
+
+- **index.html**: The main HTML file that sets up the canvas and UI elements.
+- **src/index.js**: The main JavaScript file that initializes the WebGL context and handles the animation logic.
+- **src/scene.js**: Contains functions to initialize the scene and manage 3D models.
+- **src/perfume.js**: Contains functions to create and manage the perfume bottle model.
+- **src/bookshelf.js**: Contains functions to create and manage the bookshelf model.
+- **src/floor.js**: Contains functions to create and manage the floor model.
+
+## Code Explanation
+
+### Main JavaScript Logic
+
+The main logic is found in `src/index.js`, which handles the initialization and animation of the 3D scene.
+
+- **Initialization**: The `main` function initializes the WebGL context and sets up the scene with models for the perfume bottle, bookshelf, and floor.
+- **Animation**: The `updateAnimation` function handles the animation logic, moving the perfume bottle smoothly onto the bookshelf using an easing function.
+
+### HTML Structure
+
+The HTML file `index.html` sets up the canvas and UI controls for the animation.
+
+- **Canvas**: The `<canvas>` element with the ID `glCanvas` is used for rendering the 3D scene.
+- **Controls**: A button with the ID `toggleAnimation` allows users to start and stop the animation.
+
+## How to Use
+
+1. **Set Up a Local Server**: Use a local server to serve the project files. For example, if you have Node.js installed, you can use `http-server`:
+   ```bash
+   npm install -g http-server
+   http-server ./project
+   ```
+
+2. **Open the Project**: Navigate to `http://localhost:8080` (or the port your server is running on) in your web browser.
+
+3. **Interact with the Animation**: Use the "Start Animation" button to begin the animation. The button will toggle to "Stop Animation" when the animation is running.
+
+## Additional Information
+
+- **Dependencies**: The project uses the `gl-matrix` library for matrix operations, which is included via a CDN in the HTML file.
+- **Customization**: You can adjust the animation duration and model positions in `src/index.js` to customize the animation behavior.
+
+Feel free to explore and modify the code to suit your needs!
+

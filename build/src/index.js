@@ -64,7 +64,7 @@ function main() {
             const startZ = 2;
             const endZ = -2.0; // Move further into the shelf
             const startY = 0.; // Starting lower
-            const endY = 0.15; // Keep Y position constant for middle shelf
+            const endY = 0.16; // Keep Y position constant for middle shelf
             
             const z = startZ - (easeProgress * (startZ - endZ));
             const y = startY - (easeProgress * (startY - endY));
@@ -84,7 +84,7 @@ function main() {
             isAnimating = false;
             toggleButton.textContent = 'Start Animation';
             // Ensure final position is exact
-            perfume.position = [0.5, 0.15, -2.0];
+            perfume.position = [0.5, 0.16, -2.0];
             perfume.rotation = Math.PI * 2;
         }
     }

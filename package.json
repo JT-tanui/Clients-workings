@@ -1,7 +1,7 @@
 {
   "name": "basic-project",
   "private": true,
-  "version": "3.8.0",
+  "version": "4.0.2",
   "type": "module",
   "scripts": {
     "start": "react-scripts start",

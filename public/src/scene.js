@@ -19,6 +19,7 @@ export class Scene {
         this.setupGL();
         this.initShaders();
         this.setupMouseControls();
+        this.setupTouchControls();
     }
 
     setupMouseControls() {
@@ -69,6 +70,42 @@ export class Scene {
                 vec3.scale(direction, direction, 1 + zoom);
                 vec3.add(this.camera.position, this.camera.target, direction);
             }
+        });
+    }
+
+    setupTouchControls() {
+        const canvas = this.gl.canvas;
+
+        canvas.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                this.mouseDown = true;
+                this.lastMousePos = {
+                    x: e.touches[0].clientX,
+                    y: e.touches[0].clientY
+                };
+            }
+        });
+
+        canvas.addEventListener('touchend', () => {
+            this.mouseDown = false;
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (!this.mouseDown || e.touches.length !== 1) return;
+
+            const deltaX = e.touches[0].clientX - this.lastMousePos.x;
+            const deltaY = e.touches[0].clientY - this.lastMousePos.y;
+
+            this.camera.rotation.y += deltaX * 0.005;
+            this.camera.rotation.x = Math.max(-Math.PI/3, Math.min(Math.PI/3, 
+                this.camera.rotation.x + deltaY * 0.005));
+
+            this.updateCameraPosition();
+            
+            this.lastMousePos = {
+                x: e.touches[0].clientX,
+                y: e.touches[0].clientY
+            };
         });
     }
 

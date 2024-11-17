@@ -39,28 +39,29 @@ export class PerfumeBottle {
         const profile = [
             // Base
             [0.0, -1.0],    // Center bottom
-            [0.3, -0.95],   // Base edge
-            [0.35, -0.9],   // Base curve
+            [0.2, -0.98],   // Base edge
+            [0.3, -0.95],   // Base curve
             // Main body
-            [0.45, -0.8],   // Lower body
-            [0.5, -0.6],    // Mid-lower body
-            [0.52, -0.4],   // Middle body
-            [0.52, -0.2],   // Mid-upper body
-            [0.5, 0.0],     // Upper body
-            [0.45, 0.1],    // Shoulder start
+            [0.4, -0.5],  // Lower body
+            [0.42, -0.5],    // Mid-lower body
+            [0.42, -0.3],   // Middle body
+            [0.42, -0.3],   // Mid-upper body
+            [0.4, 0.1],    // Upper body
+            [0.5, 0.05],   // Shoulder start
             // Neck
-            [0.25, 0.2],    // Shoulder
-            [0.2, 0.3],     // Upper shoulder
-            [0.15, 0.4],    // Neck start
-            [0.12, 0.5],    // Neck middle
-            [0.15, 0.6],    // Neck top
+            [0.25, 0.3],    // Shoulder
+            [0.25, 0.2],    // Upper shoulder
+            [0.5, 0.7],     // Neck start
+            [0.4, 0.6],    // Neck middle
+            [0.3, 0.5],   // Neck top
             // Cap
             [0.2, 0.65],    // Cap base
             [0.22, 0.7],    // Cap middle
-            [0.2, 0.8],     // Cap top
-            [0.18, 0.85],   // Cap edge
-            [0.0, 0.9]      // Cap center
+            [0.2, 0.75],    // Cap top
+            [0.18, 0.8],    // Cap edge
+            [0.0, 0.85]     // Cap center
         ];
+        
 
         // Generate vertices and normals
         for (let i = 0; i <= segments; i++) {
@@ -119,29 +120,30 @@ export class PerfumeBottle {
 
     render() {
         const gl = this.gl;
-        
+    
         const modelMatrix = mat4.create();
         mat4.translate(modelMatrix, modelMatrix, this.position);
         mat4.rotate(modelMatrix, modelMatrix, this.rotation, [0, 1, 0]);
         mat4.scale(modelMatrix, modelMatrix, this.scale);
-
+    
         gl.uniformMatrix4fv(this.locations.uniforms.modelMatrix, false, modelMatrix);
-        
-        // Enhanced glass material properties with a slight blue tint
+    
+        // Adjusted material properties with a Goldish tint
         gl.uniform1i(this.locations.uniforms.uUseTexture, 0);
-        gl.uniform4fv(this.locations.uniforms.baseColor, [0.8, 0.85, 1.0, 0.9]);
-
+        gl.uniform4fv(this.locations.uniforms.baseColor, [1.0, 0.85, 0.5, 0.9]); // RGBA: Gold with 90% opacity
+    
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
         gl.vertexAttribPointer(this.locations.attributes.position, 3, gl.FLOAT, false, 0, 0);
         gl.enableVertexAttribArray(this.locations.attributes.position);
-
+    
         gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
         gl.vertexAttribPointer(this.locations.attributes.normal, 3, gl.FLOAT, false, 0, 0);
         gl.enableVertexAttribArray(this.locations.attributes.normal);
-
+    
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
         gl.drawElements(gl.TRIANGLES, this.indexCount, gl.UNSIGNED_SHORT, 0);
     }
+    
 }
 
 export function createPerfumeBottle(gl) {
